@@ -62,6 +62,7 @@ const handleSubmit = (e) => {
     data.append("description", e.target.description.value);
     data.append("00NDp000009ZMoo", e.target.ngo_responses.value);
 
+    //Data submitting
     fetch(
         "https://webto.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8",
         {
@@ -73,7 +74,11 @@ const handleSubmit = (e) => {
         }
     )
         .then((response) => response.json())
-        .then((result) => alert(result))
+        .then((result) => {
+            alert(result);
+            //Form reset after submitting
+            e.target.reset();
+        })
         .catch((error) => console.log("error", error));
 };
 
@@ -235,7 +240,12 @@ export default function Home() {
                     </select>
                 </div>
 
-                <button type="submit">Submit</button>
+                <button
+                    type="submit"
+                    className="bg-white text-black font-bold py-2 hover:opacity-50 rounded-md"
+                >
+                    Submit
+                </button>
             </form>
         </main>
     );
